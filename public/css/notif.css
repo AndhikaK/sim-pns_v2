@@ -1,0 +1,31 @@
+.alert-purple {
+  border-color: #694d9f;
+  background: #694d9f;
+  color: #fff;
+}
+.alert-info-alt {
+  border-color: #b4e1e4;
+  background: #81c7e1;
+  color: #fff;
+}
+.alert-danger-alt {
+  border-color: #b63e5a;
+  background: #e26868;
+  color: #fff;
+}
+.alert-warning-alt {
+  border-color: #f3f3eb;
+  background: #e9ceac;
+  color: #fff;
+}
+.alert-success-alt {
+  border-color: #19b99a;
+  background: #20a286;
+  color: #fff;
+}
+.glyphicon {
+  margin-right: 10px;
+}
+.alert a {
+  color: gold;
+}

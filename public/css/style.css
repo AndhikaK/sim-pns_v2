@@ -1,0 +1,160 @@
+/* Code for search pegawai */
+.form-control-borderless {
+  border: none;
+}
+
+.form-control-borderless:hover,
+.form-control-borderless:active,
+.form-control-borderless:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* filter */
+.card .card-title {
+  color: #000000;
+  margin-bottom: 0.625rem;
+  text-transform: capitalize;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+label.check {
+  cursor: pointer;
+}
+
+label.check input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+label.check span {
+  font-size: 9px;
+  padding: 4px 7px;
+  border: 1px solid #2369ff;
+  display: inline-block;
+  color: #2369ff;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+label.check input:checked + span {
+  border-color: #2369ff;
+  background-color: #2369ff;
+  color: #fff;
+}
+
+.empty-icon {
+  font-size: 30px;
+}
+/* filter */
+
+/* alert */
+.alert-purple {
+  border-color: #694d9f;
+  background: #694d9f;
+  color: #fff;
+}
+.alert-info-alt {
+  border-color: #b4e1e4;
+  background: #81c7e1;
+  color: #fff;
+}
+.alert-danger-alt {
+  border-color: #b63e5a;
+  background: #e26868;
+  color: #fff;
+}
+.alert-warning-alt {
+  border-color: #f3f3eb;
+  background: #e9ceac;
+  color: #fff;
+}
+.alert-success-alt {
+  border-color: #19b99a;
+  background: #20a286;
+  color: #fff;
+}
+.glyphicon {
+  margin-right: 10px;
+}
+.alert a {
+  color: gold;
+}
+/* alert */
+
+/* Code for search pegawai */
+
+/* #
+#
+#
+#
+#
+#
+#
+#
+#
+##
+#
+# */
+/* Code untuk sim-pns yang lama */
+
+/* .back {
+  min-height: 100vh;
+}
+
+.back-nav {
+  background-color: black;
+}
+
+.navbar-color {
+  background-color: black !important;
+}
+
+input[type="text"]:disabled {
+  border: none;
+  text-transform: uppercase;
+  background-color: transparent;
+}
+
+.container-detail-data {
+  font-size: 11px;
+}
+
+/* .ttl td input {
+  max-width: fit-content;
+  background-color: transparent;
+} */
+
+/* .ttl td .ttl2 {
+  max-width: 80px;
+}
+
+.pangkat .golongan {
+  max-width: 20px;
+}
+
+.pangkat .nama_pangkat {
+  max-width: 40px;
+  border: black;
+}
+
+thead {
+  background-color: rgb(32, 32, 32);
+  color: white;
+}
+.detail-riwayat {
+  margin-bottom: 100px !important;
+}
+
+.riwayat-container {
+  min-height: 300px;
+} */
+/* 
+.detail-riwayat li table {
+  width: 70vw;
+} */
