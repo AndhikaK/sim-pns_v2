@@ -2,15 +2,15 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
+use App\Models\UsersModel;
 
 class Login extends BaseController
 {
-    protected $userModel;
+    protected $usersModel;
 
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->usersModel = new UsersModel();
     }
 
     public function index()
@@ -23,7 +23,7 @@ class Login extends BaseController
         if ($this->request->getMethod('POST')) {
             $username = $this->request->getPost('nip');
             $password = $this->request->getPost('password');
-            $user = $this->userModel->find($username);
+            $user = $this->usersModel->find($username);
 
             if (!empty($user) && $user['password'] == $password) {
                 $this->setSession($user);

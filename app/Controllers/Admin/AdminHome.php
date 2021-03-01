@@ -9,7 +9,8 @@ class AdminHome extends BaseController
 	public function index()
 	{
 		$data = [
-			'title' => 'Beranda'
+			'title' => 'Beranda',
+			'navItem' => 1
 		];
 
 		return view('admin/index', $data);

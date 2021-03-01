@@ -31,6 +31,7 @@ class Pegawai extends BaseController
         $this->bagianModel = new BagianModel();
         $this->subbagModel = new SubbagModel();
     }
+
     public function index()
     {
         $pager = \Config\Services::pager();
@@ -81,6 +82,7 @@ class Pegawai extends BaseController
 
         $data = [
             'title' => 'Lihat Data Pegawai',
+            'navItem' => 2,
             'jabatan' => $this->jabatanModel->findAll(),
             'pangkat_golongan' => $this->golonganModel->findAll(),
             'satker' => $this->satkerModel->findAll(),
@@ -101,6 +103,7 @@ class Pegawai extends BaseController
     {
         $data = [
             'title' => 'Lihat Data Pegawai',
+            'navItem' => 2,
             'jabatan' => $this->jabatanModel->findAll(),
             'pangkat_golongan' => $this->golonganModel->findAll(),
             'satker' => $this->satkerModel->findAll(),

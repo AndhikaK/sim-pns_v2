@@ -146,8 +146,8 @@
                             <tr>
                                 <th scope="row"><?= $i++; ?></td>
                                 <td>
-                                    <a href=""><i class="fa fa-info-circle mr-1 text-primary fa-fw"></i></a>
-                                    <a href="<?= base_url('/admin/delete_pegawai/' . $pegawai['nip']) ?>"><i class="fa fa-trash text-primary"></i></a>
+                                    <a href="<?= base_url('/admin/detail_pegawai/' . $pegawai['nip']) ?>"><i class="fa fa-info-circle mr-1 text-primary fa-fw"></i></a>
+                                    <a href="<?= base_url('/admin/delete_pegawai/' . $pegawai['nip']) ?>"><i class="fa fa-trash text-danger"></i></a>
                                 </td>
                                 <?php foreach ($columns as $key => $col) : ?>
                                     <td><?= strtoupper($pegawai[$col == 'p.nip' ? 'nip' : $col]) ?></td>
@@ -172,7 +172,7 @@
                 <!--Bottom Table UI-->
             <?php else : ?>
                 <!-- Team item -->
-                <div class="card mx-auto p-2" style="width: 18rem;">
+                <div class="card mx-auto p-2 mb-4" style="width: 18rem;">
                     <i class="far fa-frown-open fa-5x text-center text-primary card-img-top"></i>
 
                     <p class="card-text text-center mt-2">Pencarian tidak ditemukan...</p>

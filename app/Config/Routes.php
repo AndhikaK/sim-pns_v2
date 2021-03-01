@@ -42,9 +42,12 @@ $routes->group('login', ['filter' => 'Preventlogin'], function ($routes) {
 
 $routes->group('admin', ['filter' => 'Auth'], function ($routes) {
 	$routes->add('/', 'Admin\AdminHome::index');
+	$routes->add('test', 'Admin\AdminHome::test');
 
 	$routes->add('lihat_pegawai', 'Admin\Pegawai::index');
+	$routes->add('tambah_pegawai', 'Admin\Tambahpegawai::index');
 	$routes->add('delete_pegawai/(:any)', 'Admin\Pegawai::deletePegawai/$1');
+	$routes->add('detail_pegawai/(:any)', 'Admin\Detailpegawai::index/$1');
 });
 
 /*

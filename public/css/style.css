@@ -87,6 +87,19 @@ label.check input:checked + span {
 }
 /* alert */
 
+/* nav-item */
+.active-nav-item {
+  background-color: blue;
+  color: white !important;
+}
+.nav-text {
+  color: white;
+}
+.nav-item:hover {
+  background-color: rgb(220, 220, 255) !important ;
+}
+/* nav-item */
+
 /* Code for search pegawai */
 
 /* #
@@ -157,4 +170,4 @@ thead {
 /* 
 .detail-riwayat li table {
   width: 70vw;
-} */
+} */ ;

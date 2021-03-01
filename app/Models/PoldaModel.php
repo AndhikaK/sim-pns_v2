@@ -18,6 +18,19 @@ class PoldaModel extends Model
         return $this->db->query($query)->getResultArray();
     }
 
+    public function getTableCollumn($table)
+    {
+        return $this->getFieldNames($table);
+    }
+
+    public function insertDataArray($table, $data)
+    {
+        $builder = $this->db->table($table);
+        $builder->insert($data);
+
+        return $this->affectedRows();
+    }
+
     public function searchData($keyword, $columns, $filterItem)
     {
         $likeClause = '';
@@ -57,25 +70,13 @@ class PoldaModel extends Model
             $x++;
         }
 
-
-        // $field = '';
-        // foreach ($filterItem as $name => $value) {
-        //     $filter = $value . " = '" . $name . "'";
-        //     $filter .= $field == $value ? " or " : " and ";
-        //     $filter = str_replace("@", ".", $filter);
-        //     $filterClause .= $filter;
-        //     $field = $value;
-        // }
-
-
-        // $filterClause = substr_replace($filterClause, '', -3);
         $likeClause = substr_replace($likeClause, '', -3);
         $selectClause = substr_replace($selectClause, '', -1);
 
 
         $query = "
             SELECT 
-            " . $selectClause . "
+            " . $selectClause . ",users.role
                 FROM 
                     pegawai p
                 LEFT OUTER JOIN (
@@ -92,10 +93,10 @@ class PoldaModel extends Model
                 LEFT OUTER JOIN (
                     SELECT t3.*
                     FROM riwayat_golongan t3
-                    WHERE t3.tahun = (
-                        SELECT tahun from riwayat_golongan
+                    WHERE t3.periode_mulai = (
+                        SELECT periode_mulai from riwayat_golongan
                         WHERE nip = t3.nip
-                        ORDER by tahun DESC
+                        ORDER by periode_mulai DESC
                         LIMIT 1
                     )
                 ) as s
@@ -110,9 +111,14 @@ class PoldaModel extends Model
                     q.id_jabatan = jabatan.id_jabatan
                 LEFT OUTER JOIN golongan_pangkat ON
                     s.id_golongan = golongan_pangkat.id_golongan
+                LEFT OUTER JOIN users ON
+                    p.nip = users.nip
+                WHERE 
+                        users.role != 'admin'
+                        
 ";
         if ($keyword != "" || !empty($filterItem)) {
-            $query .= " WHERE ";
+            $query .= " AND ";
 
             if (!empty($filterItem)) {
                 $query .= $filterClause;
