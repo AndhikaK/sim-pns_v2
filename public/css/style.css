@@ -100,6 +100,24 @@ label.check input:checked + span {
 }
 /* nav-item */
 
+/* input details */
+input[type="text"]:disabled,
+input[type="date"]:disabled {
+  background-color: transparent !important;
+  border: none;
+}
+
+input[type="text"]:read-only {
+  background-color: transparent;
+}
+
+.asu {
+  height: 200px;
+  word-wrap: break-word;
+}
+
+/* input details */
+
 /* Code for search pegawai */
 
 /* #

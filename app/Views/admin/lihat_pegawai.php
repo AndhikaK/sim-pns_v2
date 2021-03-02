@@ -35,8 +35,10 @@
                                 <h4 class="card-title">Filter Kolom</h4>
                                 <hr class="">
                                 <div class="d-inline">
-                                    <label class="check"> <input type="checkbox" name="agama" value="Agama"> <span>Agama</span></label>
-                                    <label class="check"> <input type="checkbox" name="ttl" value="Tempat Lahir"> <span>Tanggal Lahir</span> </label>
+                                    <label class="checkbox check"> <input type="checkbox" name="agama" value="Agama"> <span>Agama</span></label>
+                                    <label class="checkbox check"> <input type="checkbox" name="ttl" value="Tempat Lahir"> <span>Tanggal Lahir</span> </label>
+                                    <label class="checkbox check"> <input type="checkbox" name="nik" value="NIK"> <span>NIK</span> </label>
+
                                 </div>
                             </div>
 
@@ -49,7 +51,7 @@
                                         <div class="some">
                                             <?php foreach ($jabatan as $item) : ?>
                                                 <label class="check">
-                                                    <input type="checkbox" name="<?= "filter-nama_jabatan-" . $item['nama_jabatan'] ?>" value="<?= $item['nama_jabatan'] ?>">
+                                                    <input type="checkbox" class="checkbox" name="<?= "filter-nama_jabatan-" . $item['nama_jabatan'] ?>" value="<?= $item['nama_jabatan'] ?>">
                                                     <span><?= $item['nama_jabatan'] ?></span>
                                                 </label>
                                             <?php endforeach; ?>
@@ -60,7 +62,7 @@
                                         <div class="some">
                                             <?php foreach ($pangkat_golongan as $item) : ?>
                                                 <label class="check">
-                                                    <input type="checkbox" name="<?= "filter-s@id_golongan-" . $item['id_golongan'] ?>" value="<?= $item['id_golongan'] ?>">
+                                                    <input class="checkbox" type="checkbox" name="<?= "filter-s@id_golongan-" . $item['id_golongan'] ?>" value="<?= $item['id_golongan'] ?>">
                                                     <span><?= $item['pangkat'] ?></span>
                                                 </label>
                                             <?php endforeach; ?>
@@ -71,7 +73,7 @@
                                         <div class="some">
                                             <?php foreach ($satker as $item) : ?>
                                                 <label class="check">
-                                                    <input type="checkbox" name="<?= "filter-nama_satker-" . $item['nama_satker'] ?>" value="<?= $item['nama_satker'] ?>">
+                                                    <input class="checkbox" type="checkbox" name="<?= "filter-nama_satker-" . $item['nama_satker'] ?>" value="<?= $item['nama_satker'] ?>">
                                                     <span><?= $item['nama_satker'] ?></span>
                                                 </label>
                                             <?php endforeach; ?>
@@ -82,7 +84,7 @@
                                         <div class="some">
                                             <?php foreach ($bagian as $item) : ?>
                                                 <label class="check">
-                                                    <input type="checkbox" name="<?= "filter-nama_bagian-" . $item['nama_bagian'] ?>" value="<?= $item['nama_bagian'] ?>">
+                                                    <input class="checkbox" type="checkbox" name="<?= "filter-nama_bagian-" . $item['nama_bagian'] ?>" value="<?= $item['nama_bagian'] ?>">
                                                     <span><?= $item['nama_bagian'] ?></span>
                                                 </label>
                                             <?php endforeach; ?>
@@ -93,12 +95,16 @@
                                         <div class="some">
                                             <?php foreach ($subbag as $item) : ?>
                                                 <label class="check">
-                                                    <input type="checkbox" name="<?= "filter-nama_subbag-" . $item['nama_subbag'] ?>" value="<?= $item['nama_subbag'] ?>">
+                                                    <input class="checkbox" type="checkbox" name="<?= "filter-nama_subbag-" . $item['nama_subbag'] ?>" value="<?= $item['nama_subbag'] ?>">
                                                     <span><?= $item['nama_subbag'] ?></span></label>
                                             <?php endforeach; ?>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <button class="btn btn-warning btn-sm mt-3"> Apply</button>
+                                <button type="button" class="btn btn-danger btn-sm mt-3 ml-2" onclick="resetFilter()">reset</button>
                             </div>
                         </div>
                     </div>
@@ -183,6 +189,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    function resetFilter() {
+        let inputChecked = document.querySelectorAll('.checkbox');
+        inputChecked.forEach(element => {
+            element.checked = false;
+        });
+    }
+</script>
 
 <!-- table data pegawai -->
 

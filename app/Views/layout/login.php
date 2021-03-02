@@ -18,11 +18,11 @@
             <form action="<?= base_url('/login/logingin') ?>" method="POST">
                 <label>
                     <span>Username</span>
-                    <input type="text" name="nip" required autocomplete="off" value="34" />
+                    <input type="text" name="nip" required autocomplete="off" value="admin" />
                 </label>
                 <label>
                     <span>Password</span>
-                    <input type="password" name="password" required value="123" />
+                    <input type="password" name="password" required value="admin" />
                 </label>
                 <button type="submit" class="submit">Sign In</button>
             </form>
