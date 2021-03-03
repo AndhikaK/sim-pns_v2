@@ -31,9 +31,9 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-dark font-italic <?= $navItem == 4 ? 'bg-primary' : 'bg-white' ?>">
+            <a href="<?= base_url('/admin/data_master/jabatan') ?>" class="nav-link text-dark font-italic <?= $navItem == 4 ? 'bg-primary' : 'bg-white' ?>">
                 <i class="fa fa-picture-o mr-3 fa-fw <?= $navItem == 4 ? 'text-white' : 'text-primary' ?>"></i>
-                <span class="<?= $navItem == 4 ? 'text-white' : '' ?>">Gallery </span>
+                <span class="<?= $navItem == 4 ? 'text-white' : '' ?>">Master Data </span>
             </a>
         </li>
         <li class="nav-item">

@@ -184,7 +184,6 @@
                     <p class="card-text text-center mt-2">Pencarian tidak ditemukan...</p>
 
                 </div>
-
             <?php endif ?>
         </div>
     </div>

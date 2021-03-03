@@ -15,7 +15,7 @@ class RwyGolonganModel extends Model
         $builder = $this->db->table($this->table);
 
         $builder->where('nip', $nip);
-        $builder->join('golongan_pangkat', 'golongan_pangkat.id_golongan = .riwayat_golongan.id_golongan');
+        $builder->join('golongan', 'golongan.id_golongan = .riwayat_golongan.id_golongan');
         $builder->orderBy('periode_mulai', 'DESC');
 
         return $builder->get()->getResultArray();

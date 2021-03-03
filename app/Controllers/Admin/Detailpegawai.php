@@ -51,6 +51,9 @@ class Detailpegawai extends BaseController
         $riwayatPekerjaan = $this->rwyPekerjaanModel->getOrderedData($nip);
         $riwayatGolongan = $this->rwyGolonganModel->getOrderedData($nip);
 
+        $colRwyPekerjaan = ['sk' => 'no_sk', 'jabatan' => 'nama_jabatan', 'satker' => 'nama_satker', 'bagian' => 'nama_bagian', 'subbag' => 'nama_subbag', 'periode mulai' => 'periode_mulai', 'periode selesai' => 'periode_selesai'];
+        $colRwyGolongan = ['sk' => 'no_sk', 'golongan' => 'id_golongan', 'periode mulai' => 'periode_mulai', 'periode selesai' => 'periode_selesai'];
+
         $data = [
             'title' => 'Detail Pegawai',
             'navItem' => 2,
@@ -62,7 +65,9 @@ class Detailpegawai extends BaseController
             'golongan' => $this->golonganModel->findAll(),
             'satker' => $this->satkerModel->findAll(),
             'bagian' => $this->bagianModel->findAll(),
-            'subbag' => $this->subbagModel->findAll()
+            'subbag' => $this->subbagModel->findAll(),
+            'colRwyPekerjaan' => $colRwyPekerjaan,
+            'colRwyGolongan' => $colRwyGolongan
         ];
 
         return view('admin/detail_pegawai', $data);
@@ -93,7 +98,55 @@ class Detailpegawai extends BaseController
         return redirect()->to(base_url('/admin/detail_pegawai/' . $dataPegawai['nip']));
     }
 
+    public function saveRwyPekerjaan()
+    {
+        $dataPekerjaan = $this->extractData($this->poldaModel->getTableCollumn('riwayat_pekerjaan'), $this->request->getVar());
+
+        try {
+            $this->rwyPekerjaanModel->save($dataPekerjaan);
+
+            session()->setFlashdata('success-edit', "Edit data berhasil");
+        } catch (\Exception $e) {
+            session()->setFlashdata('failed-edit', '$e');
+        }
+
+        return redirect()->to(base_url('/admin/detail_pegawai/' . $dataPekerjaan['nip']));
+    }
+
+    public function saveRwyGolongan()
+    {
+        $dataGolongan = $this->extractData($this->poldaModel->getTableCollumn('riwayat_golongan'), $this->request->getVar());
+
+        try {
+            $this->rwyGolonganModel->save($dataGolongan);
+
+            session()->setFlashdata('success-edit', "Edit data berhasil");
+        } catch (\Exception $e) {
+            session()->setFlashdata('failed-edit', '$e');
+        }
+
+        return redirect()->to(base_url('/admin/detail_pegawai/' . $dataGolongan['nip']));
+    }
+
     public function extractData($col, $data)
+    {
+        $container = array();
+
+        foreach ($col as $name) {
+            try {
+                if (str_contains($name, 'id_')) {
+                    $data[$name] = explode(' ', $data[$name]);
+                    $container[$name] = $data[$name][0];
+                } else {
+                    $container[$name] = $data[$name];
+                }
+            } catch (Exception $e) { }
+        }
+
+        return $container;
+    }
+
+    public function extractDataRwy($col, $data)
     {
         $container = array();
 

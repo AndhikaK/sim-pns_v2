@@ -118,6 +118,13 @@ input[type="text"]:read-only {
 
 /* input details */
 
+/* table riwayat */
+
+.table-riwayat {
+  min-height: 200px;
+}
+/* table riwayat */
+
 /* Code for search pegawai */
 
 /* #

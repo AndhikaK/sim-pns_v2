@@ -48,6 +48,7 @@ $routes->group('admin', ['filter' => 'Auth'], function ($routes) {
 	$routes->add('tambah_pegawai', 'Admin\Tambahpegawai::index');
 	$routes->add('delete_pegawai/(:any)', 'Admin\Pegawai::deletePegawai/$1');
 	$routes->add('detail_pegawai/(:any)', 'Admin\Detailpegawai::index/$1');
+	$routes->add('data_master/(:any)', 'Admin\Datamaster::index/$1');
 });
 
 /*

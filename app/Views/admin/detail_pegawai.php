@@ -108,6 +108,134 @@
     </form>
 
 
+    <!-- Switcher riwayat table -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/js/uikit-icons.min.js"></script>
+
+
+    <hr class="uk-divider-icon">
+
+    <?php $switcher = '' ?>
+    <?php if (str_contains($edit, "rwy")) {
+        $switcherState = explode("-", $edit);
+        $switcher = $switcherState[2];
+    } ?>
+
+    <div>
+        <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
+            <li class="<?= $switcher == "pkj" ? "uk-active" : "" ?>"><a href="#">Riwayat Pekerjaan</a></li>
+            <li class="<?= $switcher == "gol" ? "uk-active" : "" ?>"><a href="#">Riwayat Golongan dan Pangkat</a></li>
+            <li class="<?= $switcher == "pdd" ? "uk-active" : "" ?>"><a href="#">Riwayat Pendidikan</a></li>
+        </ul>
+
+        <ul class="uk-switcher uk-margin uk-margin-large-bottom detail-riwayat">
+            <!-- riwayat Pekerjaan -->
+            <li>
+                <table class="table table-sm table-responsive table-riwayat">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>No</th>
+                            <th>Action</th>
+                            <?php foreach ($colRwyPekerjaan as $name => $value) : ?>
+                                <th><?= strtoupper($name) ?></th>
+                            <?php endforeach ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1 ?>
+                        <?php foreach ($riwayatPekerjaan as $item) : ?>
+                            <tr>
+                                <form action="<?= base_url('/admin/detailpegawai/saveRwyGolongan') ?>" method="POST">
+                                    <td><?= $i++ ?></td>
+                                    <td class="d-inline-flex">
+                                        <?php if ($edit != 'edit-rwy-pkj-' . $item['id_riwayat_pekerjaan']) : ?>
+                                            <a href="<?= base_url('/admin/detail_pegawai/' . $detailPegawai['nip'] . '/edit-rwy-pkj-' . $item['id_riwayat_pekerjaan']) ?>" class="uk-icon-link uk-margin-small-right text-primary" uk-icon="file-edit"></a>
+                                            <a href="#" class="uk-icon-link text-danger" uk-icon="trash"></a>
+                                        <?php elseif ($edit) : ?>
+                                            <button type="submit" uk-icon="check" class="text-success"></button>
+                                            <a href="<?= base_url('/admin/detail_pegawai/' . $detailPegawai['nip']) ?>" uk-icon="close" class="text-danger"></a>
+                                        <?php endif; ?>
+                                    </td>
+                                    <?php foreach ($colRwyPekerjaan as $name => $value) : ?>
+                                        <td>
+                                            <?php if ($name == "jabatan" || $name == 'satker' || $name == 'bagian' || $name == 'subbag') : ?>
+                                                <input type="text" list="<?= $name . 'ListOption' ?>" name="<?= 'id_' . $name ?>" value="<?= $item['id_' . $name] . " - " . $item['nama_' . $name] ?>" <?= $edit == 'edit-rwy-pkj-' . $item['id_riwayat_pekerjaan'] ? "" : "disabled"  ?> autocomplete="off">
+                                            <?php elseif (str_contains($name, 'periode')) : ?>
+                                                <input class="form-control" type="date" value="<?= $item[$value] ?>" name="<?= $value ?>" id="ttl" <?= $edit == 'edit-rwy-pkj-' . $item['id_riwayat_pekerjaan'] ? "" : "disabled" ?> autocomplete="off">
+                                            <?php else : ?>
+                                                <input type="text" name="<?= $value ?>" value="<?= strtoupper($item[$value]) ?>" <?= $edit == 'edit-rwy-pkj-' . $item['id_riwayat_pekerjaan'] ? "" : "disabled"  ?>>
+                                            <?php endif; ?>
+                                        </td>
+                                    <?php endforeach ?>
+                                    <input type="text" name="id_riwayat_pekerjaan" value="<?= $item['id_riwayat_pekerjaan'] ?>" hidden>
+                                    <input type="text" name="nip" value="<?= $detailPegawai['nip'] ?>" hidden>
+                                </form>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </li>
+            <!-- riwayat Pekerjaan -->
+
+            <!-- riwayat Golongan -->
+            <li>
+                <table class="table table-sm table-responsive table-riwayat">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>No</th>
+                            <th>Action</th>
+                            <?php foreach ($colRwyGolongan as $name => $value) : ?>
+                                <th><?= strtoupper($name) ?></th>
+                            <?php endforeach ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1 ?>
+                        <?php foreach ($riwayatGolongan as $item) : ?>
+                            <tr>
+                                <form action="<?= base_url('/admin/detailpegawai/saveRwyGolongan') ?>" method="POST">
+                                    <td><?= $i++ ?></td>
+                                    <td class="d-inline-flex">
+                                        <?php if ($edit != 'edit-rwy-gol-' . $item['id_riwayat_golongan']) : ?>
+                                            <a href="<?= base_url('/admin/detail_pegawai/' . $detailPegawai['nip'] . '/edit-rwy-gol-' . $item['id_riwayat_golongan']) ?>" class="uk-icon-link uk-margin-small-right text-primary" uk-icon="file-edit"></a>
+                                            <a href="<?= base_url('/admin/detailpegawai/deletedata/gol/' . $item['id_riwayat_golongan']) ?>" class="uk-icon-link text-danger" uk-icon="trash"></a>
+                                        <?php elseif ($edit) : ?>
+                                            <button type="submit" uk-icon="check" class="text-success"></button>
+                                            <a href="<?= base_url('/admin/detail_pegawai/' . $detailPegawai['nip']) ?>" uk-icon="close" class="text-danger"></a>
+                                        <?php endif; ?>
+                                    </td>
+                                    <?php foreach ($colRwyGolongan as $name => $value) : ?>
+                                        <td>
+                                            <?php if ($name == "jabatan" || $name == 'satker' || $name == 'bagian' || $name == 'subbag') : ?>
+                                                <input type="text" list="<?= $name . 'ListOption' ?>" name="<?= 'id_' . $name ?>" value="<?= $item['id_' . $name] . " - " . $item['nama_' . $name] ?>" <?= $edit == 'edit-rwy-gol-' . $item['id_riwayat_golongan'] ? "" : "disabled"  ?> autocomplete="off">
+                                            <?php elseif (str_contains($name, 'periode')) : ?>
+                                                <input class="form-control" type="date" value="<?= $item[$value] ?>" name="<?= $value ?>" id="ttl" <?= $edit == 'edit-rwy-gol-' . $item['id_riwayat_golongan'] ? "" : "disabled" ?> autocomplete="off">
+                                            <?php else : ?>
+                                                <input type="text" name="<?= $value ?>" value="<?= strtoupper($item[$value]) ?>" <?= $edit == 'edit-rwy-gol-' . $item['id_riwayat_golongan'] ? "" : "disabled"  ?>>
+                                            <?php endif; ?>
+                                        </td>
+                                    <?php endforeach ?>
+                                    <input type="text" name="id_riwayat_golongan" value="<?= $item['id_riwayat_golongan'] ?>" hidden>
+                                    <input type="text" name="nip" value="<?= $detailPegawai['nip'] ?>" hidden>
+                                </form>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </li>
+            <!-- riwayat Golongan -->
+
+            <!-- riwayat Pendidikan -->
+            <li>
+
+            </li>
+            <!-- riwayat Pendidikan -->
+        </ul>
+    </div>
+    <!-- Switcher riwayat table -->
+
+
     <!-- list data to display -->
 
     <datalist id="genderListOption">

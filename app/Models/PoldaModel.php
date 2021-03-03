@@ -23,6 +23,13 @@ class PoldaModel extends Model
         return $this->getFieldNames($table);
     }
 
+    public function getTableData($table)
+    {
+        $builder = $this->db->table($table);
+
+        return $builder->get()->getResultArray();
+    }
+
     public function insertDataArray($table, $data)
     {
         $builder = $this->db->table($table);
@@ -109,8 +116,8 @@ class PoldaModel extends Model
                     q.id_subbag = subbag.id_subbag
                 LEFT OUTER JOIN jabatan ON
                     q.id_jabatan = jabatan.id_jabatan
-                LEFT OUTER JOIN golongan_pangkat ON
-                    s.id_golongan = golongan_pangkat.id_golongan
+                LEFT OUTER JOIN golongan ON
+                    s.id_golongan = golongan.id_golongan
                 LEFT OUTER JOIN users ON
                     p.nip = users.nip
                 WHERE 
