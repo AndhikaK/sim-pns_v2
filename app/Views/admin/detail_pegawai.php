@@ -131,6 +131,7 @@
 
         <ul class="uk-switcher uk-margin uk-margin-large-bottom detail-riwayat">
             <!-- riwayat Pekerjaan -->
+            <?php if (count($riwayatPekerjaan)) ?>
             <li>
                 <table class="table table-sm table-responsive table-riwayat">
                     <thead class="thead-dark">
@@ -227,7 +228,59 @@
             <!-- riwayat Golongan -->
 
             <!-- riwayat Pendidikan -->
-            <li>
+            <li class="table-riwayat">
+                <div class=" row m-2">
+                    <div class="col uk-box-shadow-small">
+                        <div class="bg-primary text-white d-inline-block p-2">Pendidikan Umum</div>
+                        <table class="uk-table">
+                            <thead>
+                                <th>Tahun Kelulusan</th>
+                                <th>Pendidikan</th>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col uk-box-shadow-small p-2">
+                        <caption>Pendidikan Umum</caption>
+                        <table class="uk-table">
+                            <thead>
+                                <th>Tahun Kelulusan</th>
+                                <th>Pendidikan</th>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <div class="col">
+                        <caption>Pendidikan Umum</caption>
+                        <table class="uk-table">
+                            <thead>
+                                <th>Tahun Kelulusan</th>
+                                <th>Pendidikan</th>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col">
+                        <caption>Pendidikan Umum</caption>
+                        <table class="uk-table">
+                            <thead>
+                                <th>Tahun Kelulusan</th>
+                                <th>Pendidikan</th>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
             </li>
             <!-- riwayat Pendidikan -->

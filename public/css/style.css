@@ -122,6 +122,11 @@ input[type="text"]:read-only {
 
 .table-riwayat {
   min-height: 200px;
+  font-size: 12px;
+}
+
+.uk-table {
+  color: #000000 !important;
 }
 /* table riwayat */
 
