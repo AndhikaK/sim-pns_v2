@@ -9,10 +9,10 @@ use App\Models\SatkerModel;
 use App\Models\SubbagModel;
 use App\Models\JabatanModel;
 use App\Models\GolonganModel;
+use App\Models\KeluargaModel;
 use App\Models\PegawaiModel;
 use App\Models\RwyGolonganModel;
 use App\Models\RwyPekerjaanModel;
-use App\Models\RwyPendidikanModel;
 use App\Models\UsersModel;
 
 class Tambahpegawai extends BaseController
@@ -25,9 +25,9 @@ class Tambahpegawai extends BaseController
 	protected $bagianModel;
 	protected $subbagModel;
 	protected $pegawaiModel;
+	protected $keluargaModel;
 	protected $rwyPekerjaanModel;
 	protected $rwyGolonganModel;
-	protected $rwyPendidikanModel;
 
 	public function __construct()
 	{
@@ -40,8 +40,8 @@ class Tambahpegawai extends BaseController
 		$this->subbagModel = new SubbagModel();
 		$this->rwyPekerjaanModel = new RwyPekerjaanModel();
 		$this->rwyGolonganModel = new RwyGolonganModel();
-		$this->rwyPendidikanModel = new RwyPendidikanModel();
 		$this->usersModel = new UsersModel();
+		$this->keluargaModel = new KeluargaModel();
 	}
 
 	public function index()

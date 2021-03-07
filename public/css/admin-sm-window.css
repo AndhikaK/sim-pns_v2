@@ -1,0 +1,81 @@
+/* fa icon color */
+.fa-icon {
+  height: 14px;
+  width: auto;
+  margin-right: 5px;
+}
+
+.fa-icon-primary {
+  filter: invert(54%) sepia(29%) saturate(2296%) hue-rotate(199deg)
+    brightness(102%) contrast(101%);
+}
+
+.fa-icon-danger {
+  filter: invert(29%) sepia(80%) saturate(6864%) hue-rotate(353deg)
+    brightness(108%) contrast(131%);
+}
+
+.fa-icon-success {
+  filter: invert(40%) sepia(66%) saturate(1738%) hue-rotate(83deg)
+    brightness(101%) contrast(101%);
+}
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.color {
+  background-color: #0fb100;
+}
+/* fa icon color */
+
+/* alert color */
+.alert-purple {
+  border-color: #694d9f;
+  background: #694d9f;
+  color: #fff;
+}
+.alert-info-alt {
+  border-color: #b4e1e4;
+  background: #81c7e1;
+  color: #fff;
+}
+.alert-danger-alt {
+  border-color: #b63e5a;
+  background: #e26868;
+  color: #fff;
+}
+.alert-warning-alt {
+  border-color: #f3f3eb;
+  background: #e9ceac;
+  color: #fff;
+}
+.alert-success-alt {
+  border-color: #19b99a;
+  background: #20a286;
+  color: #fff;
+}
+.glyphicon {
+  margin-right: 10px;
+}
+.alert a {
+  color: gold;
+}
+/* alert color */
+
+/* table */
+.table-riwayat {
+  min-height: 100px;
+  font-size: 12px;
+}
+
+.tbody-rwy tr td {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* table */

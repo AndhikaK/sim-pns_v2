@@ -20,8 +20,6 @@
         <input type="text" name="id_riwayat_pekerjaan" value="<?= $riwayatPekerjaan[0]['id_riwayat_pekerjaan'] ?>" hidden>
         <input type="text" name="id_riwayat_golongan" value="<?= $riwayatGolongan[0]['id_riwayat_golongan'] ?>" hidden>
 
-
-
         <div class="row">
             <div class="col-2">
                 <img src="/sdm-polri.png" class="col-12">
@@ -109,9 +107,6 @@
 
 
     <!-- Switcher riwayat table -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/css/uikit.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/js/uikit-icons.min.js"></script>
 
 
     <hr class="uk-divider-icon">
@@ -131,9 +126,34 @@
 
         <ul class="uk-switcher uk-margin uk-margin-large-bottom detail-riwayat">
             <!-- riwayat Pekerjaan -->
-            <?php if (count($riwayatPekerjaan)) ?>
+
             <li>
-                <table class="table table-sm table-responsive table-riwayat">
+                <a class="text-white mb-2" data-toggle="collapse" href="#collapse-rwy-pekerjaan" role="button" aria-expanded="false" aria-controls="collapse-rwy-pekerjaan">
+                    <p class="bg-primary p-1 rounded  d-inline"><img src="/asset/svg/plus-solid.svg" class="fa-icon fa-icon-white p-0"> Tambah Riwayat Pekerjaan</p>
+                </a>
+                <div class="collapse mt-3" id="collapse-rwy-pekerjaan">
+                    <div class="card card-body">
+                        <form action="<?= base_url("/admin/detailpegawai/tambahriwayatpkj") ?>" method="POST">
+                            <?php foreach ($colRwyPekerjaan as $name => $value) : ?>
+                                <div class="form-group row">
+                                    <label for="<?= $value ?>" class="col-2 col-form-label"><?= $name ?></label>
+                                    <div class="col-6">
+                                        <?php if (!str_contains($value, 'periode')) : ?>
+                                            <input type="text" class="form-control form-control-sm" id="<?= $value ?>" name="<?= str_replace('nama', 'id', $value) ?>" list="<?= $name ?>ListOption" autocomplete="off" required>
+                                        <?php else : ?>
+                                            <input type="date" class="form-control form-control-sm" name="<?= $value ?>">
+                                        <?php endif ?>
+                                    </div>
+                                </div>
+                            <?php endforeach ?>
+                            <input type="text" value="<?= $detailPegawai['nip'] ?>" name="nip" hidden>
+
+                            <button class="btn btn-primary">Tambah</button>
+                        </form>
+                    </div>
+                </div>
+
+                <table class="table table-sm table-responsive table-riwayat mt-3">
                     <thead class="thead-dark">
                         <tr>
                             <th>No</th>
@@ -147,12 +167,12 @@
                         <?php $i = 1 ?>
                         <?php foreach ($riwayatPekerjaan as $item) : ?>
                             <tr>
-                                <form action="<?= base_url('/admin/detailpegawai/saveRwyGolongan') ?>" method="POST">
+                                <form action="<?= base_url('/admin/detailpegawai/saveRwyPekerjaan') ?>" method="POST">
                                     <td><?= $i++ ?></td>
                                     <td class="d-inline-flex">
                                         <?php if ($edit != 'edit-rwy-pkj-' . $item['id_riwayat_pekerjaan']) : ?>
                                             <a href="<?= base_url('/admin/detail_pegawai/' . $detailPegawai['nip'] . '/edit-rwy-pkj-' . $item['id_riwayat_pekerjaan']) ?>" class="uk-icon-link uk-margin-small-right text-primary" uk-icon="file-edit"></a>
-                                            <a href="#" class="uk-icon-link text-danger" uk-icon="trash"></a>
+                                            <a href="<?= count($riwayatPekerjaan) < 2 ? "#" : base_url('/admin/Detailpegawai/deletepekerjaan/' . $item['id_riwayat_pekerjaan']) ?>" class="uk-icon-link text-danger" uk-icon="trash"></a>
                                         <?php elseif ($edit) : ?>
                                             <button type="submit" uk-icon="check" class="text-success"></button>
                                             <a href="<?= base_url('/admin/detail_pegawai/' . $detailPegawai['nip']) ?>" uk-icon="close" class="text-danger"></a>
@@ -181,7 +201,31 @@
 
             <!-- riwayat Golongan -->
             <li>
-                <table class="table table-sm table-responsive table-riwayat">
+                <a class="text-white mb-2" data-toggle="collapse" href="#collapse-rwy-Golongan" role="button" aria-expanded="false" aria-controls="collapse-rwy-Golongan">
+                    <p class="bg-primary p-1 rounded  d-inline"><img src="/asset/svg/plus-solid.svg" class="fa-icon fa-icon-white p-0"> Tambah Riwayat Golongan</p>
+                </a>
+                <div class="collapse mt-3" id="collapse-rwy-Golongan">
+                    <div class="card card-body">
+                        <form action="<?= base_url("/admin/detailpegawai/tambahriwayatgol") ?>" method="POST">
+                            <?php foreach ($colRwyGolongan as $name => $value) : ?>
+                                <div class="form-group row">
+                                    <label for="<?= $value ?>" class="col-2 col-form-label"><?= $name ?></label>
+                                    <div class="col-6">
+                                        <?php if (!str_contains($value, 'periode')) : ?>
+                                            <input type="text" class="form-control form-control-sm" id="<?= $value ?>" name="<?= str_replace('nama', 'id', $value) ?>" list="<?= $name ?>ListOption" autocomplete="off" required>
+                                        <?php else : ?>
+                                            <input type="date" class="form-control form-control-sm" name="<?= $value ?>">
+                                        <?php endif ?>
+                                    </div>
+                                </div>
+                            <?php endforeach ?>
+                            <input type="text" value="<?= $detailPegawai['nip'] ?>" name="nip" hidden>
+
+                            <button class="btn btn-primary">Tambah</button>
+                        </form>
+                    </div>
+                </div>
+                <table class="table table-sm table-responsive table-riwayat mt-3">
                     <thead class="thead-dark">
                         <tr>
                             <th>No</th>
@@ -200,7 +244,7 @@
                                     <td class="d-inline-flex">
                                         <?php if ($edit != 'edit-rwy-gol-' . $item['id_riwayat_golongan']) : ?>
                                             <a href="<?= base_url('/admin/detail_pegawai/' . $detailPegawai['nip'] . '/edit-rwy-gol-' . $item['id_riwayat_golongan']) ?>" class="uk-icon-link uk-margin-small-right text-primary" uk-icon="file-edit"></a>
-                                            <a href="<?= base_url('/admin/detailpegawai/deletedata/gol/' . $item['id_riwayat_golongan']) ?>" class="uk-icon-link text-danger" uk-icon="trash"></a>
+                                            <a href="<?= count($riwayatGolongan) < 2 ? "#" : base_url('/admin/detailpegawai/deletedata/gol/' . $item['id_riwayat_golongan']) ?>" class="uk-icon-link text-danger" uk-icon="trash"></a>
                                         <?php elseif ($edit) : ?>
                                             <button type="submit" uk-icon="check" class="text-success"></button>
                                             <a href="<?= base_url('/admin/detail_pegawai/' . $detailPegawai['nip']) ?>" uk-icon="close" class="text-danger"></a>
@@ -229,55 +273,100 @@
 
             <!-- riwayat Pendidikan -->
             <li class="table-riwayat">
-                <div class=" row m-2">
-                    <div class="col uk-box-shadow-small">
-                        <div class="bg-primary text-white d-inline-block p-2">Pendidikan Umum</div>
-                        <table class="uk-table">
+                <div class="row m-2 mb-0">
+                    <div class="col rwy-pdd-col-box pl-0 pr-0 pr-0 pb-2">
+                        <div class="bg-blue-soft text-white p-2">
+                            PENDIDIKAN UMUM
+                            <a onclick="window.open('/admin/detailpegawai/tambahpdd/<?= $detailPegawai['nip'] ?>/dikum', 'title', 'width=800, height=600')" class="uk-icon-link uk-margin-small-left text-white" uk-icon="file-edit"></a>
+                        </div>
+                        <table class="uk-table m-0 p-0">
                             <thead>
-                                <th>Tahun Kelulusan</th>
-                                <th>Pendidikan</th>
+                                <th class="">Tahun Kelulusan</th>
+                                <th class="">Pendidikan</th>
                             </thead>
-                            <tbody>
 
-                            </tbody>
+                            <?php if (count($riwayatDikum) > 0) : ?>
+                                <tbody class="tbody-rwy">
+                                    <?php foreach ($riwayatDikum as $item) : ?>
+                                        <tr>
+                                            <td><?= $item['tahun_lulus'] ?></td>
+                                            <td><?= $item['jenjang'] ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                </tbody>
+                            <?php else : ?>
+                            <?php endif ?>
                         </table>
                     </div>
-                    <div class="col uk-box-shadow-small p-2">
-                        <caption>Pendidikan Umum</caption>
-                        <table class="uk-table">
+                    <div class="col rwy-pdd-col-box pl-0 pr-0 pb-2">
+                        <div class="bg-blue-soft text-white p-2">
+                            PENDIDIKAN POLISI
+                            <a onclick="window.open('/admin/detailpegawai/tambahpdd/<?= $detailPegawai['nip'] ?>/dikpol', 'title', 'width=800, height=600')" class="uk-icon-link uk-margin-small-left text-white" uk-icon="file-edit"></a>
+                        </div>
+                        <table class="uk-table m-0 p-0">
                             <thead>
                                 <th>Tahun Kelulusan</th>
                                 <th>Pendidikan</th>
                             </thead>
-                            <tbody>
-
-                            </tbody>
+                            <?php if (count($riwayatDikpol) > 0) : ?>
+                                <tbody class="tbody-rwy">
+                                    <?php foreach ($riwayatDikpol as $item) : ?>
+                                        <tr>
+                                            <td><?= $item['tahun_lulus'] ?></td>
+                                            <td><?= $item['nama_dikpol'] ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                </tbody>
+                            <?php else : ?>
+                            <?php endif ?>
                         </table>
                     </div>
                 </div>
-                <div class="row m-3">
-                    <div class="col">
-                        <caption>Pendidikan Umum</caption>
-                        <table class="uk-table">
+                <div class="row m-2 mt-0">
+                    <div class="col rwy-pdd-col-box pl-0 pr-0 pb-2">
+                        <div class="bg-blue-soft text-white p-2">
+                            DIKBANGUM
+                            <a onclick="window.open('/admin/detailpegawai/tambahpdd/<?= $detailPegawai['nip'] ?>/dikbangum', 'title', 'width=800, height=600')" class="uk-icon-link uk-margin-small-left text-white" uk-icon="file-edit"></a>
+                        </div>
+                        <table class="uk-table m-0 p-0">
                             <thead>
                                 <th>Tahun Kelulusan</th>
                                 <th>Pendidikan</th>
                             </thead>
-                            <tbody>
-
-                            </tbody>
+                            <?php if (count($riwayatDikbangum) > 0) : ?>
+                                <tbody class="tbody-rwy">
+                                    <?php foreach ($riwayatDikbangum as $item) : ?>
+                                        <tr>
+                                            <td><?= $item['tahun_lulus'] ?></td>
+                                            <td><?= $item['nama_dikbangum'] ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                </tbody>
+                            <?php else : ?>
+                            <?php endif ?>
                         </table>
                     </div>
-                    <div class="col">
-                        <caption>Pendidikan Umum</caption>
-                        <table class="uk-table">
+                    <div class="col rwy-pdd-col-box pl-0 pr-0 pb-2">
+                        <div class="bg-blue-soft text-white p-2">
+                            DIKBANGSPES
+                            <a onclick="window.open('/admin/detailpegawai/tambahpdd/<?= $detailPegawai['nip'] ?>/dikbangspes', 'title', 'width=800, height=600')" class="uk-icon-link uk-margin-small-left text-white" uk-icon="file-edit"></a>
+                        </div>
+                        <table class="uk-table m-0 p-0">
                             <thead>
                                 <th>Tahun Kelulusan</th>
                                 <th>Pendidikan</th>
                             </thead>
-                            <tbody>
-
-                            </tbody>
+                            <?php if (count($riwayatDikbangspes) > 0) : ?>
+                                <tbody class="tbody-rwy">
+                                    <?php foreach ($riwayatDikbangspes as $item) : ?>
+                                        <tr>
+                                            <td><?= $item['tahun_lulus'] ?></td>
+                                            <td><?= $item['nama_dikbangspes'] ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                </tbody>
+                            <?php else : ?>
+                            <?php endif ?>
                         </table>
                     </div>
                 </div>
@@ -287,6 +376,42 @@
         </ul>
     </div>
     <!-- Switcher riwayat table -->
+    <hr class="uk-divider-icon">
+
+    <!-- daftar anggota Keluarga -->
+
+    <ul class="uk-subnav uk-subnav-pill" uk-switcher="connect: .keluarga-switcher">
+        <li>
+            <a href="#" onclick="window.open('/admin/detailpegawai/keluarga/<?= $detailPegawai['nip'] ?>', 'title', 'width=800, height=600')">
+                Keluarga <img src="/asset/svg/edit-solid.svg" class="fa-icon fa-icon-white">
+            </a>
+        </li>
+    </ul>
+
+    <ul class="uk-switcher uk-margin keluarga-switcher">
+        <li>
+            <table class="uk-table m-0 p-0 table-riwayat">
+                <thead>
+                    <?php foreach ($colKeluarga as $name => $value) : ?>
+                        <th><?= $name ?></th>
+                    <?php endforeach ?>
+                </thead>
+                <?php if (count($dataKeluarga) > 0) : ?>
+                    <tbody class="tbody-rwy">
+                        <?php foreach ($dataKeluarga as $item) : ?>
+                            <tr>
+                                <?php foreach ($colKeluarga as $name => $value) : ?>
+                                    <td><?= $item[$value] ?></td>
+                                <?php endforeach ?>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                <?php else : ?>
+                <?php endif ?>
+            </table>
+        </li>
+    </ul>
+    <!-- daftar anggota Keluarga -->
 
 
     <!-- list data to display -->

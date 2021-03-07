@@ -12,7 +12,6 @@ use App\Models\GolonganModel;
 use App\Models\PegawaiModel;
 use App\Models\RwyGolonganModel;
 use App\Models\RwyPekerjaanModel;
-use App\Models\RwyPendidikanModel;
 use App\Models\UsersModel;
 use PhpParser\Node\Stmt\Break_;
 
@@ -29,7 +28,6 @@ class Datamaster extends BaseController
     protected $pegawaiModel;
     protected $rwyPekerjaanModel;
     protected $rwyGolonganModel;
-    protected $rwyPendidikanModel;
 
     public function __construct()
     {
@@ -42,7 +40,6 @@ class Datamaster extends BaseController
         $this->subbagModel = new SubbagModel();
         $this->rwyPekerjaanModel = new RwyPekerjaanModel();
         $this->rwyGolonganModel = new RwyGolonganModel();
-        $this->rwyPendidikanModel = new RwyPendidikanModel();
         $this->usersModel = new UsersModel();
     }
     public function index($master = null, $edit = null)
