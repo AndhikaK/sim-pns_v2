@@ -40,6 +40,12 @@ class PoldaModel extends Model
 
     public function searchData($keyword, $columns, $filterItem, $rangeItem)
     {
+        if (empty($rangeItem)) {
+            $rangeItem[0] = '';
+            $rangeItem[1] = '';
+        }
+
+
         $likeClause = '';
         $selectClause = '';
         $filterClause = '';
@@ -149,10 +155,11 @@ class PoldaModel extends Model
                         users.role != 'admin'
                         
 ";
-        if ($keyword != "" || !empty($filterItem) || !empty($rangeItem)) {
+        if ($keyword != "" || !empty($filterItem) || ($rangeItem[0] != '' && $rangeItem[1] != '')) {
+
             $query .= " AND ";
 
-            if (!empty($filterItem) || !empty($rangeItem)) {
+            if (!empty($filterItem) || ($rangeItem[0] != '' && $rangeItem[1] != '')) {
                 $query .= $filterClause;
                 if ($keyword != "") {
                     $query .= " and ";
