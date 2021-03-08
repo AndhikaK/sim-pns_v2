@@ -38,7 +38,7 @@ class PoldaModel extends Model
         return $this->affectedRows();
     }
 
-    public function searchData($keyword, $columns, $filterItem)
+    public function searchData($keyword, $columns, $filterItem, $rangeItem)
     {
         $likeClause = '';
         $selectClause = '';
@@ -59,6 +59,9 @@ class PoldaModel extends Model
         $field = '';
         $filterLength = count($filterItem);
         $x = 1;
+
+        d($filterItem);
+
         foreach ($filterItem as $name => $value) {
             $filter = '';
             if ($field == '') {
@@ -74,6 +77,28 @@ class PoldaModel extends Model
             $filterClause .= $x == $filterLength ? ")" : "";
 
             $field = $value;
+            $x++;
+            d($name);
+        }
+
+        if ($rangeItem[0] != '' && $rangeItem[1] != '') {
+            d('rangeitem');
+            $filter = '';
+            if ($field == '') {
+                $filter = '(';
+            } else {
+                $filter = $field == 'tanggal_pengangkatan' ? " or " : " and (";
+            }
+
+            $filter .= " tanggal_pengangkatan BETWEEN '" . $rangeItem[0] . "' AND '" . $rangeItem[1] . "')";
+            $filter = str_replace("@", ".", $filter);
+            d($filterClause);
+            $filterClause .= $filter;
+            d($filterClause);
+
+            $filterClause .= $x == $filterLength ? ")" : "";
+
+            $field = 'tanggal_pengangkatan';
             $x++;
         }
 
@@ -124,10 +149,10 @@ class PoldaModel extends Model
                         users.role != 'admin'
                         
 ";
-        if ($keyword != "" || !empty($filterItem)) {
+        if ($keyword != "" || !empty($filterItem) || !empty($rangeItem)) {
             $query .= " AND ";
 
-            if (!empty($filterItem)) {
+            if (!empty($filterItem) || !empty($rangeItem)) {
                 $query .= $filterClause;
                 if ($keyword != "") {
                     $query .= " and ";
@@ -138,6 +163,8 @@ class PoldaModel extends Model
                 $query .= "(" . $likeClause . ")";
             }
         }
+
+        d($query);
 
         $dataPegawai = $this->db->query($query)->getResultArray();
         return array($dataPegawai, $query);

@@ -101,6 +101,24 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="card-title">Terhitung masuk tanggal</h4>
+                                        <div class="some pl-2">
+                                            <span class="d-block filter-date-label">Dari:</span>
+                                            <input type="date" name="range-tanggal_pengangkatan-dari" class="filter-date rounded m-1">
+                                            <span class="d-block filter-date-label">Sampai:</span>
+                                            <input type="date" name="range-tanggal_pengangkatan-sampai" class="filter-date rounded m-1">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="row d-flex justify-content-center">
                                 <button class="btn btn-warning btn-sm mt-3"> Apply</button>

@@ -26,7 +26,7 @@
             </div>
             <div class="col-5">
                 <div class="form-group row">
-                    <label for="nip" class="col col-form-label-sm form-label-small">NIP</label>
+                    <label for="nip" class="col col-form-label-sm form-label-small">NIP/NRP</label>
                     <div class="col-8">
                         <input type="text" class="form-control" id="nip" name="nip" value="<?= $detailPegawai['nip'] ?>" <?= $edit == 'edit-bio' ? "readonly" : "disabled" ?> autocomplete="off">
                     </div>
@@ -38,11 +38,17 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="tanggal_pengangkatan" class="col col-form-label-sm form-label-small">Tanggal Pengangkatan</label>
+                    <div class="col-8">
+                        <!-- <input type="text" class="form-control" id="tanggal_pengangkatan" name="tanggal_pengangkatan" value="<?= $detailPegawai['tanggal_pengangkatan'] ?>" <?= $edit == 'edit-bio' ? "" : "disabled" ?> autocomplete="off"> -->
+                        <input class="form-control" type="date" value="<?= $detailPegawai['tanggal_pengangkatan'] ?>" name="tanggal_pengangkatan" id="tanggal_pengangkatan" <?= $edit == 'edit-bio' ? "" : "disabled" ?> autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="tempat_lahir" class="col col-form-label-sm form-label-small">Tempat, Tanggal Lahir</label>
                     <div class="col-8">
                         <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="<?= $detailPegawai['tempat_lahir'] ?>" <?= $edit == 'edit-bio' ? "" : "disabled" ?> autocomplete="off">
                         <input class="form-control" type="date" value="<?= $detailPegawai['ttl'] ?>" name="ttl" id="ttl" <?= $edit == 'edit-bio' ? "" : "disabled" ?> autocomplete="off">
-
                     </div>
                 </div>
                 <div class="form-group row">

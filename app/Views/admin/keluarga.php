@@ -42,7 +42,7 @@
                     <?php foreach ($dataKeluarga as $item) : ?>
                         <tr>
                             <?php if ($idItem == $item['id_keluarga']) : ?>
-                                <form action="<?= base_url("/admin/detailpegawai/editdatakeluarga/$nip/" . $item['id_keluarga']) ?>" method="POST">
+                                <form action="<?= base_url("/admin/detailpegawai/editkeluarga/$nip/" . $item['id_keluarga']) ?>" method="POST">
                                     <td>
                                         <button class="icon-button">
                                             <img src="/asset/svg/check-circle-solid.svg" class="fa-icon-success fa-icon" alt="">
@@ -52,17 +52,16 @@
                                         </a>
                                     </td>
                                     <?php foreach ($colForm as $name => $value) : ?>
-                                        <td class="pb-2"><input type="text" name="<?= $value ?>" value="<?= $item[$value] ?>"></td>
+                                        <td class="pb-2"><input type="<?= str_contains($value, 'tanggal') ? 'date' : 'text' ?>" name="<?= $value ?>" value="<?= $item[$value] ?>"></td>
                                     <?php endforeach ?>
 
-                                    <input type="text" value="<?= $nip ?>" name="nip" hidden>
                                 </form>
                             <?php else : ?>
                                 <td>
                                     <a href="<?= base_url("/admin/detailpegawai/keluarga/$nip/" . $item['id_keluarga']) ?>" class="">
                                         <img src="/asset/svg/edit-solid.svg" class="fa-icon-primary fa-icon" alt="">
                                     </a>
-                                    <a href="<?= base_url("/admin/detailpegawai/deletedatapdd/$nip/" . $item['id_keluarga']) ?>" class="">
+                                    <a href="<?= base_url("/admin/detailpegawai/deletekeluarga/$nip/" . $item['id_keluarga']) ?>" class="">
                                         <img src="/asset/svg/trash-solid.svg" class="fa-icon-danger fa-icon" alt="">
                                     </a>
                                 </td>

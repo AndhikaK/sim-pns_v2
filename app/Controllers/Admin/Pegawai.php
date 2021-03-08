@@ -39,6 +39,7 @@ class Pegawai extends BaseController
         $filterItem = array();
         $keyword = null;
         $filterData = array();
+        $rangeData  = array();
 
         if (count($this->request->getVar()) > 0) {
             $keyword = $this->request->getVar('keyword');
@@ -46,24 +47,32 @@ class Pegawai extends BaseController
         }
 
         $columns = [
-            'NIP' => 'p.nip', 'Nama Pegawai' => 'nama_pegawai', 'Golongan - Pangkat' => 'pangkat', 'Jabatan' => 'nama_jabatan', 'Satuan Kerja' => 'nama_satker', 'Bagian' => 'nama_bagian', 'Sub Bagian' => 'nama_subbag'
+            'NIP' => 'p.nip', 'Nama Pegawai' => 'nama_pegawai', 'Golongan - Pangkat' => 'pangkat', 'Jabatan' => 'nama_jabatan', 'Satuan Kerja' => 'nama_satker', 'Bagian' => 'nama_bagian', 'Sub Bagian' => 'nama_subbag', 'Tanggal Pengangkatan' => 'tanggal_pengangkatan'
         ];
 
         // dd($filterData);
 
         foreach ($filterData as $name => $value) {
             if ($name != 'keyword' && $name != 'page') {
-                if (!str_contains($name, 'filter')) {
+                if (!str_contains($name, 'filter') && !str_contains($name, 'range')) {
                     $columns[$value] = $name;
-                } else {
+                } elseif (str_contains($name, 'filter')) {
                     $name = explode("-", $name);
                     $name = $name[1];
                     $filterItem[$value] = $name;
+                } elseif (str_contains($name, 'range')) {
+                    // $nameExplode = explode('-', $name);
+                    if (str_contains($name, 'dari'))
+                        $rangeData[0] = $value;
+                    elseif (str_contains($name, 'sampai'))
+                        $rangeData[1] = $value;
                 }
             }
         }
 
-        $searchData = $this->poldaModel->searchData($keyword, $columns, $filterItem);
+        d($rangeData);
+
+        $searchData = $this->poldaModel->searchData($keyword, $columns, $filterItem, $rangeData);
         $dataPegawai = $searchData[0];
         $searchQuery = $searchData[1];
 

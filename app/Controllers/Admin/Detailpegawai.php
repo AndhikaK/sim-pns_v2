@@ -104,6 +104,7 @@ class Detailpegawai extends BaseController
     public function saveBio()
     {
         $detailInput = $this->request->getVar();
+        // dd($detailInput);
 
         $colPegawai = $this->poldaModel->getTableCollumn('pegawai');
         $colRwyPekerjaan = $this->poldaModel->getTableCollumn('riwayat_pekerjaan');
@@ -262,7 +263,32 @@ class Detailpegawai extends BaseController
     }
 
     public function editkeluarga($nip, $idItem)
-    { }
+    {
+        $dataKeluarga = $this->request->getVar();
+
+        try {
+            $this->keluargaModel->update($idItem, $dataKeluarga);
+
+            session()->setFlashdata('success-edit', 'Data keluarga berhasil diperbaharui');
+        } catch (\Exception $e) {
+            session()->setFlashdata('failed-edit', $e);
+        }
+
+        return redirect()->to(base_url("/admin/detailpegawai/keluarga/$nip"));
+    }
+
+    public function deletekeluarga($nip, $id)
+    {
+        try {
+            $this->keluargaModel->delete($id);
+
+            session()->setFlashdata('success-delete', 'Data keluarga berhasil dihapus');
+        } catch (\Exception $e) {
+            session()->setFlashdata('failed-delete', $e);
+        }
+
+        return redirect()->back();
+    }
 
     public function deleteDataPdd($nip, $pdd, $idItem)
     {
